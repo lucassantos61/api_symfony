@@ -27,8 +27,9 @@ class UserController extends FOSRestController
     public function getUsersAction(Request $request)
     {
         $repository = $this->getDoctrine()->getRepository(User::class);
-        $userIds = json_decode($request->getContent(), true);
-        $user = $repository->find($userIds['id']);
+        $userId = $request->get('id');
+
+        $user = $repository->find($userId);
         return $this->handleView($this->view($user));
     }
 
